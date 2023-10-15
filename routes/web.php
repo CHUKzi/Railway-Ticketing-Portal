@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     //Stations
     Route::prefix('/train-stations')->group(function () {
         Route::get('/', [StationsController::class, 'index'])->name('stations.index');
+        Route::get('/create', [StationsController::class, 'create'])->name('stations.create');
     });
 
     //Trains

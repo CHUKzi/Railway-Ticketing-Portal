@@ -54,7 +54,9 @@
  --}}
                         <div class="card-block">
                             <div class="mb-4">
-                                <button class="btn btn-primary btn-round waves-effect waves-light float-right"><i class="fa fa-plus-circle"></i>Add Station</button>
+                                <a href="{{ route('stations.create') }}">
+                                    <button class="btn btn-primary btn-round waves-effect waves-light float-right"><i class="fa fa-plus-circle"></i>Add Station</button>
+                                </a>
                             </div>
                             <div class="dt-responsive table-responsive">
 
@@ -66,7 +68,7 @@
                                             <th>Name</th>
                                             <th>Teliphone</th>
                                             <th>Registerd Date</th>
-                                            <th>Distric</th>
+                                            <th>District</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>

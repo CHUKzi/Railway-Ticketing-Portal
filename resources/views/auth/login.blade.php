@@ -29,7 +29,9 @@
                                         <span class="form-bar"></span>
                                         <label class="float-label">Username</label>
                                         @error('email')
-                                        <p class="text-danger">{{ $message }}</p>
+                                        <span class="messages">
+                                            <p class="text-danger error">{{ $message }}</p>
+                                        </span>
                                         @enderror
                                     </div>
                                     <div class="form-group form-primary">
@@ -37,33 +39,18 @@
                                         <span class="form-bar"></span>
                                         <label class="float-label">Password</label>
                                         @error('password')
-                                        <p class="text-danger">{{ $message }}</p>
+                                        <span class="messages">
+                                            <p class="text-danger error">{{ $message }}</p>
+                                        </span>
                                         @enderror
                                     </div>
-                                    <div class="row m-t-25 text-left">
-                                        <div class="col-12">
-                                            <div class="checkbox-fade fade-in-primary">
-                                                <label>
-                                                    <input type="checkbox" value>
-                                                    <span class="cr"><i
-                                                            class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                                    <span class="text-inverse">Remember me</span>
-                                                </label>
-                                            </div>
-                                            <div class="forgot-phone text-right float-right">
-                                                <a href="auth-reset-password.html" class="text-right f-w-600"> Forgot
-                                                    Password?</a>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                     <div class="row m-t-30">
                                         <div class="col-md-12">
                                             <button type="submit"
                                                 class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">LOGIN</button>
                                         </div>
                                     </div>
-                                    <p class="text-inverse text-left">Don't have an account?<a
-                                            href="auth-sign-up-social.html"> <b>Register here </b></a>for free!</p>
                                 </div>
                             </div>
                         </form>
