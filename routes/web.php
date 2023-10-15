@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\StationsController;
+use App\Http\Controllers\TrainsController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +35,27 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+//Routes
+Route::middleware('auth')->group(function () {
+    //Stations
+    Route::prefix('/train-stations')->group(function () {
+        Route::get('/', [StationsController::class, 'index'])->name('stations.index');
+    });
+
+    //Trains
+    Route::prefix('/trains')->group(function () {
+        Route::get('/', [TrainsController::class, 'index'])->name('trains.index');
+    });
+
+    //Users
+    Route::prefix('/users')->group(function () {
+        Route::get('/', [UsersController::class, 'index'])->name('users.index');
+    });
+
+    //Staff
+    Route::prefix('/staff')->group(function () {
+        Route::get('/', [StaffController::class, 'index'])->name('staff.index');
+    });
+});
+
+require __DIR__ . '/auth.php';

@@ -12,3 +12,5 @@
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('/build/assets/css/style.css') }}">
 
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('/build/assets/css/widget.css')}}">
+
+@yield('css')
