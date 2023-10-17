@@ -5,8 +5,6 @@
 @endsection
 
 @section('css')
-
-
     <link rel="stylesheet" type="text/css"
         href="{{ URL::asset('/build/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css"
@@ -14,6 +12,7 @@
     <link rel="stylesheet" type="text/css"
         href="{{ URL::asset('/build/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
 
+    <link rel="stylesheet" type="text/css" href="{{ URL::asset('/build/assets/icon/icofont/css/icofont.css') }}">
 @endsection
 
 @section('content')
@@ -46,22 +45,23 @@
             <div class="page-wrapper">
 
                 <div class="page-body">
+                    @include('../layouts/alert')
 
                     <div class="card">
-{{--                         <div class="card-header">
+                        {{--                         <div class="card-header">
                             <h5>Base Style</h5>
                         </div>
  --}}
                         <div class="card-block">
                             <div class="mb-4">
                                 <a href="{{ route('stations.create') }}">
-                                    <button class="btn btn-primary btn-round waves-effect waves-light float-right"><i class="fa fa-plus-circle"></i>Add Station</button>
+                                    <button class="btn btn-primary btn-round waves-effect waves-light float-right"><i
+                                            class="fa fa-plus-circle"></i>Add Station</button>
                                 </a>
                             </div>
                             <div class="dt-responsive table-responsive">
 
-                                <table id="base-style"
-                                    class="table table-striped table-bordered nowrap">
+                                <table id="base-style" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -73,6 +73,28 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($stations as $station)
+                                            <tr>
+                                                <td>{{ $station->id }}</td>
+                                                <td>{{ $station->name }}</td>
+                                                <td>{{ $station->phone }}</td>
+                                                <td>{{ $station->created_at }}</td>
+                                                <td>{{ $station->district_name }}</td>
+                                                <td>
+                                                    <a href="{{ route('stations.view', $station->id) }}">
+                                                        <button class="btn btn-mat waves-effect waves-light btn-primary btn-sm">view</button>
+                                                    </a>
+
+                                                    <a href="{{ route('stations.view', $station->id) }}">
+                                                        <button class="btn btn-mat waves-effect waves-light btn-warning btn-sm">Edit</button>
+                                                    </a>
+
+                                                    <a href="{{ route('stations.view', $station->id) }}">
+                                                        <button class="btn btn-mat waves-effect waves-light btn-danger btn-sm">Delete</button>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -84,7 +106,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 

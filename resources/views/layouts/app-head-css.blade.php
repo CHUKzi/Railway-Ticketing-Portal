@@ -13,4 +13,8 @@
 
 <link rel="stylesheet" type="text/css" href="{{ URL::asset('/build/assets/css/widget.css')}}">
 
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('/build/assets/css/pages.css') }}">
+
+<link rel="stylesheet" type="text/css" href="{{ URL::asset('/build/assets/icon/icofont/css/icofont.css') }}">
+
 @yield('css')
