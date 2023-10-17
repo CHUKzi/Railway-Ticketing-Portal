@@ -6,6 +6,7 @@
 
 @section('css')
     <!-- tui charts css -->
+
     <link rel="stylesheet" href="{{ URL::asset('/build/libs/tui-chart/tui-chart.min.css') }}" type="text/css" media="all">
 @endsection
 

@@ -5,7 +5,6 @@
 @endsection
 
 @section('css')
-
 @endsection
 
 @section('content')
@@ -23,7 +22,7 @@
         @endslot
 
         @slot('page_header')
-{{--             <ul class="breadcrumb breadcrumb-title">
+            {{--             <ul class="breadcrumb breadcrumb-title">
                 <li class="breadcrumb-item">
                     <a href="{{ route('stations.index') }}"><i class="fa fa-train"></i></a>
                 </li>
@@ -40,6 +39,14 @@
                     <div class="row">
                         <div class="col-sm-12">
 
+                            @if ($errors->any())
+                                <div class="alert alert-danger" role="alert">
+                                    @foreach ($errors->all() as $error)
+                                        {{ $error }}<br>
+                                    @endforeach
+                                </div>
+                            @endif
+                            @include('../layouts/alert')
 
                             <div class="card">
                                 <div class="card-header">
@@ -47,20 +54,23 @@
                                 </div>
                                 <div class="card-block">
 
-                                    <form method="post" action="">
+                                    <form method="post" action="{{ route('stations.store') }}">
+                                        @csrf
                                         <div class="row">
 
                                             <div class="col-xl-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Station Name*</label>
-                                                    <input type="text" class="form-control" name="name" placeholder="Enter Station Name">
+                                                    <input type="text" class="form-control" name="name"
+                                                        placeholder="Enter Station Name">
                                                 </div>
                                             </div>
 
                                             <div class="col-xl-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Station Phone Number*</label>
-                                                    <input type="text" class="form-control" name="phone" placeholder="Enter Station Phone Number">
+                                                    <input type="text" class="form-control" name="phone"
+                                                        placeholder="Enter Station Phone Number">
                                                 </div>
                                             </div>
 
@@ -69,7 +79,8 @@
                                                     <label class="form-label">Station District*</label>
                                                     <select class="form-control" name="district">
                                                         @foreach ($districts as $district)
-                                                            <option value="{{ $district->id }}">{{ $district->name }}</option>
+                                                            <option value="{{ $district->id }}">{{ $district->name }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -78,14 +89,16 @@
                                             <div class="col-xl-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Station Longitude*</label>
-                                                    <input type="text" class="form-control" name="longitude" placeholder="Enter Station Phone Number">
+                                                    <input type="text" class="form-control" name="longitude"
+                                                        placeholder="Enter Station Phone Number">
                                                 </div>
                                             </div>
 
                                             <div class="col-xl-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Station Latitude*</label>
-                                                    <input type="text" class="form-control" name="latitude" placeholder="Enter Station Phone Number">
+                                                    <input type="text" class="form-control" name="latitude"
+                                                        placeholder="Enter Station Phone Number">
                                                 </div>
                                             </div>
 

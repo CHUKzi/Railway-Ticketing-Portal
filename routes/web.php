@@ -41,6 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/train-stations')->group(function () {
         Route::get('/', [StationsController::class, 'index'])->name('stations.index');
         Route::get('/create', [StationsController::class, 'create'])->name('stations.create');
+        Route::get('/view/{id}', [StationsController::class, 'view'])->name('stations.view');
+        Route::post('/store', [StationsController::class, 'store'])->name('stations.store');
+        Route::get('/edit', [StationsController::class, 'edit'])->name('stations.edit');
+
     });
 
     //Trains
