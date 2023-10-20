@@ -85,11 +85,11 @@
                                                         <button class="btn btn-mat waves-effect waves-light btn-primary btn-sm">view</button>
                                                     </a>
 
-                                                    <a href="{{ route('stations.view', $station->id) }}">
+                                                    <a href="{{ route('stations.edit', $station->id) }}">
                                                         <button class="btn btn-mat waves-effect waves-light btn-warning btn-sm">Edit</button>
                                                     </a>
 
-                                                    <a href="{{ route('stations.view', $station->id) }}">
+                                                    <a href="{{ route('stations.destroy', $station->id) }}" onclick="return confirm('Are you sure?')">
                                                         <button class="btn btn-mat waves-effect waves-light btn-danger btn-sm">Delete</button>
                                                     </a>
                                                 </td>
