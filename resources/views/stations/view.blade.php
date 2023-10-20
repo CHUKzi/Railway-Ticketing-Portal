@@ -112,11 +112,11 @@
                                         @endif
                                     </div>
                                     <div class="form-group">
-                                        <a href="" onclick="return confirm('Are you sure?')">
-                                            <button type="submit" class="btn btn-danger m-b-0">Delete</button>
+                                        <a href="{{ route('stations.destroy', $station->id) }}" onclick="return confirm('Are you sure?')">
+                                            <button class="btn btn-danger m-b-0">Delete</button>
                                         </a>
 
-                                        <a href="{{ route('stations.index') }}"><button type="submit"
+                                        <a href="{{ route('stations.index') }}"><button
                                                 class="btn btn-primary m-b-0">Cancel</button></a>
                                     </div>
 
