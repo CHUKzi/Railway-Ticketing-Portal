@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 
 @section('title')
-    @lang('translation.Login')
+    Login
 @endsection
 
     @section('content')

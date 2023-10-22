@@ -49,6 +49,19 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+        // Check if the user has roles is allowed
+        $user = Auth::user();
+        $allowedRoles = ['super admin', 'admin', 'staff'];
+
+        $role = $user->getRoleNames();
+
+        if (!in_array($role[0], $allowedRoles)) {
+            Auth::logout();
+            throw ValidationException::withMessages([
+                'email' => trans('auth.failed'),
+            ]);
+        }
+
         RateLimiter::clear($this->throttleKey());
     }
 

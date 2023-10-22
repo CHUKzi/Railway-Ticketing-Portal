@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UsersController extends AppBaseController
 {
@@ -35,11 +37,23 @@ class UsersController extends AppBaseController
             return $this->sendResponse($user, 'User Registered Successful', null);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
-            // Handle validation errors
             return $this->sendResponse(null, null, $e->errors());
         } catch (Exception $e) {
             Log::emergency("File:" . $e->getFile() . "Line:" . $e->getLine() . "Message:" . $e->getMessage());
             return $this->sendResponse(null, null, 'Store Failed');
         }
+    }
+
+    public function auth(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        try {
+            if (!$token = JWTAuth::attempt($credentials)) {
+                return $this->sendResponse(null, null, 'Invalid credentials');
+            }
+        } catch (JWTException $e) {
+            return $this->sendResponse(null, null, 'Could not create token');
+        }
+        return response()->json(compact('token'));
     }
 }
