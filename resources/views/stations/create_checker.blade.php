@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Create Train Station
+    Create Checker
 @endsection
 
 @section('css')
@@ -14,7 +14,7 @@
         @endslot
 
         @slot('title')
-            Create Train Station
+            Create Checker
         @endslot
 
         @slot('description')
@@ -50,62 +50,58 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Add Station Details</h5>
+                                    <h5>Add Checker Details</h5>
                                 </div>
                                 <div class="card-block">
 
-                                    <form method="post" action="{{ route('stations.store') }}">
+                                    <form method="post" action="{{ route('stations.checker.store') }}">
                                         @csrf
+                                        <input type="hidden" name="station_id" value="{{ $station->id }}">
                                         <div class="row">
-
                                             <div class="col-xl-6">
                                                 <div class="form-group">
                                                     <label class="form-label">Station Name*</label>
                                                     <input type="text" class="form-control" name="name"
-                                                        placeholder="Enter Station Name">
+                                                        placeholder="Enter Name" value="{{ $station->name }}" readonly>
                                                 </div>
                                             </div>
 
                                             <div class="col-xl-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">Station Phone Number*</label>
+                                                    <label class="form-label">Name*</label>
+                                                    <input type="text" class="form-control" name="name"
+                                                        placeholder="Enter Name">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">Phone Number*</label>
                                                     <input type="text" class="form-control" name="phone"
-                                                        placeholder="Enter Station Phone Number">
+                                                        placeholder="Enter Phone Number">
                                                 </div>
                                             </div>
 
                                             <div class="col-xl-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">Station District*</label>
-                                                    <select class="form-control" name="district">
-                                                        @foreach ($districts as $district)
-                                                            <option value="{{ $district->id }}">{{ $district->name }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
+                                                    <label class="form-label">Email*</label>
+                                                    <input type="text" class="form-control" name="email"
+                                                        placeholder="Enter Email Number">
                                                 </div>
                                             </div>
 
                                             <div class="col-xl-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">Station Longitude*</label>
-                                                    <input type="text" class="form-control" name="longitude"
-                                                        placeholder="Enter Station Phone Number">
+                                                    <label class="form-label">Password*</label>
+                                                    <input type="password" class="form-control" name="password"
+                                                        placeholder="Enter Password Number">
                                                 </div>
                                             </div>
 
                                             <div class="col-xl-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">Station Latitude*</label>
-                                                    <input type="text" class="form-control" name="latitude"
-                                                        placeholder="Enter Station Phone Number">
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xl-6">
-                                                <div class="form-group">
-                                                    <label class="form-label">Description&nbsp;(optional)</label>
-                                                    <textarea class="form-control" name="description" rows="1"></textarea>
+                                                    <label class="form-label">Address*</label>
+                                                    <textarea class="form-control" name="address" rows="1"></textarea>
                                                 </div>
                                             </div>
 
@@ -114,7 +110,9 @@
                                             <button type="submit" class="btn btn-primary m-b-0">Create</button>
                                         </div>
                                     </form>
-                                    
+                                    <a href="{{ route('stations.view', ['id' => $station->id]) }}"><button
+                                        class="btn btn-primary m-b-0">Back</button></a>
+
                                 </div>
                             </div>
 

@@ -89,9 +89,11 @@
                                                         <button class="btn btn-mat waves-effect waves-light btn-warning btn-sm">Edit</button>
                                                     </a>
 
-                                                    <a href="{{ route('stations.destroy', $station->id) }}" onclick="return confirm('Are you sure?')">
-                                                        <button class="btn btn-mat waves-effect waves-light btn-danger btn-sm">Delete</button>
-                                                    </a>
+                                                    <form action="{{ route('stations.destroy', $station->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-mat waves-effect waves-light btn-danger btn-sm">Delete</button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
