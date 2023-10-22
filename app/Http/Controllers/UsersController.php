@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -10,7 +11,8 @@ class UsersController extends Controller
     public function index()
     {
         // Index users
-        return view('users.index');
+        $users = User::role('user')->get();
+        return view('users.index', compact('users'));
     }
 
     public function create()
@@ -38,8 +40,10 @@ class UsersController extends Controller
 
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->back()->with('SuccessMessage','User deleted successfully');
     }
 }

@@ -64,11 +64,31 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
-                                            <th>Create Point</th>
+                                            <th>Credited Points</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($users as $user)
+                                        <tr>
+                                            <td>{{ $user->id }}</td>
+                                            <td>{{ $user->first_name }}&nbsp;{{ $user->last_name }}</td>
+                                            <td>{{ $user->email }}</td>
+                                            <td>{{ $user->mobile ? : 'N/A'}}</td>
+                                            <td>{{ __('0.00') }}</td>
+                                            <td>
+                                                <a href="{{ route('users.view', $user->id) }}">
+                                                    <button class="btn btn-mat waves-effect waves-light btn-primary btn-sm">view</button>
+                                                </a>
+                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-mat waves-effect waves-light btn-danger btn-sm">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

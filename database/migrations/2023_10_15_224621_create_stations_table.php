@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone')->nullable();
-            $table->unsignedBigInteger('province_id');
+            $table->unsignedBigInteger('district_id');
             $table->string('longitude');
             $table->string('latitude');
             $table->string('description')->nullable();
-            $table->foreign('province_id')->references('id')->on('provinces');
+            $table->string('qr_code')->nullable();
+            $table->foreign('district_id')->references('id')->on('districts');
             $table->softDeletes();
             $table->timestamps();
         });
