@@ -46,7 +46,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', [StationsController::class, 'edit'])->name('stations.edit');
         Route::put('/update/{id}', [StationsController::class, 'update'])->name('stations.update');
         Route::delete('/destroy/{id}', [StationsController::class, 'destroy'])->name('stations.destroy');
-
+        //Ticket Checkers
+        Route::get('/{id}/create-checker', [StationsController::class, 'checker_create'])->name('stations.checker.create');
+        Route::post('/store-checker', [StationsController::class, 'checker_store'])->name('stations.checker.store');
+        Route::get('{station_id}/history-checker/{id}', [StationsController::class, 'checker_history'])->name('stations.checker.history');
+        Route::delete('delete_checker/{id}', [StationsController::class, 'delete_checker'])->name('stations.checker.delete');
     });
 
     //Trains

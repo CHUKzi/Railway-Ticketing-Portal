@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\District;
 use App\Models\Station;
+use App\Models\TicketChecker;
 use Exception;
+use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
@@ -38,7 +40,9 @@ class StationsController extends Controller
             ->where('stations.id', $id)
             ->first();
 
-        return view('stations.view', compact('station'));
+        $ticket_checkers = TicketChecker::where('station_id', $id)->get();
+
+        return view('stations.view', compact('station', 'ticket_checkers'));
     }
 
     public function store(Request $request)
@@ -88,9 +92,7 @@ class StationsController extends Controller
 
         $station = Station::find($id);
         $districts = District::orderBy('name')->get();
-        return view('stations.edit',compact('station','districts'));
-
-
+        return view('stations.edit', compact('station', 'districts'));
     }
     public function update(Request $request, $id)
     {
@@ -134,5 +136,65 @@ class StationsController extends Controller
         $station = Station::find($id);
         $station->delete();
         return redirect()->route('stations.index')->with('SuccessMessage', 'Station deleted successfully');
+    }
+
+    /*
+    *
+    *Ticket Checkers
+    *
+    *
+    */
+
+    public function checker_create($id)
+    {
+        $station = Station::find($id);
+        return view('stations.create_checker', compact('station'));
+    }
+
+    public function checker_store(Request $request)
+    {
+        // Store the station ticket checker
+        $request->validate([
+            'station_id' => 'required|exists:stations,id',
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|max:255',
+            'email' => 'required|email|unique:ticket_checkers,email',
+            'password' => 'required|string',
+            'address' => 'required|string',
+        ]);
+
+        try {
+            // Create a new TicketChecker instance
+            $ticketChecker = new TicketChecker();
+            $ticketChecker->station_id = $request->input('station_id');
+            $ticketChecker->name = $request->input('name');
+            $ticketChecker->phone = $request->input('phone');
+            $ticketChecker->email = $request->input('email');
+            $ticketChecker->password = Hash::make($request->input('password'));
+            $ticketChecker->address = $request->input('address');
+
+            $ticketChecker->save();
+
+            return redirect()->route('stations.index')->with('SuccessMessage', 'Ticket Checker created successfully');
+        } catch (Exception $e) {
+
+            return back()->with('ErrorMessage', 'An error occurred while creating the Ticket Checker.');
+        }
+    }
+
+    public function checker_history($station_id, $id)
+    {
+        //  Checker history
+        $station = Station::find($station_id);
+        $checker = TicketChecker::find($id);
+
+        return view('stations.view_checker_history', compact('station','checker'));
+    }
+
+    public function delete_checker($id)
+    {
+        $checker = TicketChecker::find($id);
+        $checker->delete();
+        return redirect()->route('stations.index')->with('SuccessMessage', 'Ticket Checker delete successfully');
     }
 }
