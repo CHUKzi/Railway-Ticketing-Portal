@@ -40,6 +40,16 @@
                     </a>
                 </li>
 
+                <li class="{{ request()->is('packages*') ? 'active' : '' }}">
+                    <a href="{{ route('packages.index') }}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="fa fa-shopping-cart"></i>
+                        </span>
+                        <span class="pcoded-mtext">Pakcages</span>
+                    </a>
+                </li>
+
+
                 <li class="{{ request()->is('staff*') ? 'active' : '' }}">
                     <a href="{{ route('staff.index') }}" class="waves-effect waves-dark">
                         <span class="pcoded-micon">

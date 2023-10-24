@@ -33,7 +33,6 @@ class UsersController extends AppBaseController
             $user->role_id = 4; // User role
             $user->assignRole('user');
             $user->save();
-            Log::info($user);
             return $this->sendResponse($user, 'User Registered Successful', null);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
