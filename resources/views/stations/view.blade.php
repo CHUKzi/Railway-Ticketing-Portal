@@ -171,6 +171,7 @@
                                                         <td>{{ $ticket_checker->address }}</td>
                                                         <td>{{ $ticket_checker->created_at }}</td>
                                                         <td>
+                                                            <div style="display: flex;">
                                                             <a
                                                                 href="{{ route('stations.checker.history', ['station_id' => $station->id, 'id' => $ticket_checker->id]) }}">
                                                                 <button
@@ -186,6 +187,7 @@
                                                                     onclick="return confirm('Are you sure?')"
                                                                     class="btn btn-mat waves-effect waves-light btn-danger btn-sm">Remove</button>
                                                             </form>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 @endforeach
