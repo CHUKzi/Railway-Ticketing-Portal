@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class StaffController extends Controller
@@ -9,8 +10,8 @@ class StaffController extends Controller
     public function index()
     {
         // Index Staff
-
-        return view('staff.index');
+        $users = User::role(['super admin', 'admin', 'staff'])->get();
+        return view('staff.index', compact('users'));
 
     }
 

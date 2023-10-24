@@ -81,6 +81,7 @@
                                                 <td>{{ $station->created_at }}</td>
                                                 <td>{{ $station->district_name }}</td>
                                                 <td>
+                                                    <div style="display: flex;">
                                                     <a href="{{ route('stations.view', $station->id) }}">
                                                         <button class="btn btn-mat waves-effect waves-light btn-primary btn-sm">view</button>
                                                     </a>
@@ -94,6 +95,7 @@
                                                         @method('DELETE')
                                                         <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-mat waves-effect waves-light btn-danger btn-sm">Delete</button>
                                                     </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @endforeach

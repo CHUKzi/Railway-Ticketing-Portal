@@ -21,7 +21,7 @@
         @endslot
 
         @slot('description')
-            Summary Of System
+            Summary of System
         @endslot
 
         @slot('page_header')
