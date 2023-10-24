@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StationsController;
@@ -67,6 +68,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [UsersController::class, 'index'])->name('users.index');
         Route::get('/view/{id}', [UsersController::class, 'view'])->name('users.view');
         Route::delete('/destroy/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+    });
+
+    //Packages
+    Route::prefix('/packages')->group(function () {
+        Route::get('/', [PackagesController::class, 'index'])->name('packages.index');
+        Route::get('/create', [PackagesController::class, 'create'])->name('packages.create');
+        Route::post('/store', [PackagesController::class, 'store'])->name('packages.store');
+        Route::get('/edit/{id}', [PackagesController::class, 'edit'])->name('packages.edit');
+        Route::put('/update/{id}', [PackagesController::class, 'update'])->name('packages.update');
+        Route::delete('/destroy/{id}', [PackagesController::class, 'destroy'])->name('packages.destroy');
     });
 
     //Staff
