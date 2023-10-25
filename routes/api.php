@@ -20,13 +20,20 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('api')->prefix('/v1')->group(function () {
     // User Authentication
     Route::prefix('/user')->group(function () {
-        Route::post('/store', [UsersController::class, 'store'])->name('user.store');
-        Route::post('/auth', [UsersController::class, 'auth'])->name('user.auth');
+        Route::post('/store', [UsersController::class, 'store']);
+        Route::post('/auth', [UsersController::class, 'auth']);
+        Route::post('/logout', [UsersController::class, 'logout'])->middleware('auth:api');
     });
 
     // Packages
     Route::prefix('/packages')->middleware('auth:api')->group(function () {
-        Route::get('/', [PackagesController::class, 'index'])->name('api.packages.index');
-        Route::get('/{id}', [PackagesController::class, 'indexSingle'])->name('api.packages.index.single');
+        Route::get('/', [PackagesController::class, 'index']);
+        Route::get('/{id}', [PackagesController::class, 'indexSingle']);
+        Route::post('/buy', [PackagesController::class, 'buyNow']);
+    });
+
+    Route::prefix('/my')->middleware('auth:api')->group(function () {
+        Route::get('/payments', [UsersController::class, 'myPayments']);
+        Route::get('/account', [UsersController::class, 'myAccount']);
     });
 });
