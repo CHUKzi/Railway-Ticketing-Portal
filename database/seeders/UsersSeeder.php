@@ -21,6 +21,7 @@ class UsersSeeder extends Seeder
             'last_name' => 'Harsha',
             'email' => 'royanharsha6@gmail.com',
             'password' => bcrypt('123456'),
+            'credit_points' => 0,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
