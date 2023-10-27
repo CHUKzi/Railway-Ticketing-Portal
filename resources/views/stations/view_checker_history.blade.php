@@ -62,13 +62,13 @@
 
                                 <div class="card-block">
 
-                                    <div class="mb-4">
+{{--                                     <div class="mb-4">
                                         <a href="{{ route('stations.checker.create', ['id' => $station->id]) }}">
                                             <button
                                                 class="btn btn-primary btn-round waves-effect waves-light float-right"><i
                                                     class="fa fa-plus-circle"></i>Add</button>
                                         </a>
-                                    </div>
+                                    </div> --}}
                                     <div class="dt-responsive table-responsive">
 
                                         <table id="base-style" class="table table-striped table-bordered nowrap">

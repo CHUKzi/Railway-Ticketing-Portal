@@ -31,7 +31,7 @@
                     </a>
                 </li>
 
-                <li class="{{ request()->is('users*') ? 'active' : '' }}">
+                <li class="{{ Str::endsWith(request()->path(), 'users') ? 'active' : '' }}">
                     <a href="{{ route('users.index') }}" class="waves-effect waves-dark">
                         <span class="pcoded-micon">
                             <i class="fa fa-users"></i>
@@ -40,10 +40,19 @@
                     </a>
                 </li>
 
+                <li class="{{ Str::endsWith(request()->path(), 'payments') ? 'active' : '' }}">
+                    <a href="{{ route('users.index.payments') }}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="fa fa-shopping-cart"></i>
+                        </span>
+                        <span class="pcoded-mtext">Users Payments</span>
+                    </a>
+                </li>
+
                 <li class="{{ request()->is('packages*') ? 'active' : '' }}">
                     <a href="{{ route('packages.index') }}" class="waves-effect waves-dark">
                         <span class="pcoded-micon">
-                            <i class="fa fa-shopping-cart"></i>
+                            <i class="fa fa-gift"></i>
                         </span>
                         <span class="pcoded-mtext">Pakcages</span>
                     </a>

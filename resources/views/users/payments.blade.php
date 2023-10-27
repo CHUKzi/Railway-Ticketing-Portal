@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Users
+    Users Payemnts
 @endsection
 
 @section('css')
@@ -19,23 +19,23 @@
 @section('content')
     @component('components.breadcrumb')
         @slot('icon')
-            <i class="fa fa-users bg-c-blue"></i>
+            <i class="fa fa-shopping-cart bg-c-blue"></i>
         @endslot
 
         @slot('title')
-            Users
+            Users Payments
         @endslot
 
         @slot('description')
-            Registerd Users
+        All Users Payments
         @endslot
 
         @slot('page_header')
             <ul class="breadcrumb breadcrumb-title">
                 <li class="breadcrumb-item">
-                    <a href="{{ route('stations.index') }}"><i class="fa fa-users"></i></a>
+                    <a href="{{ route('stations.index') }}"><i class="fa fa-shopping-cart"></i></a>
                 </li>
-                <li class="breadcrumb-item"><a href="{{ route('stations.index') }}">Users</a> </li>
+                <li class="breadcrumb-item"><a href="{{ route('stations.index') }}">Payments</a> </li>
             </ul>
         @endslot
     @endcomponent
@@ -61,36 +61,25 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Credit Points</th>
-                                            <th>Action</th>
+                                            <th>User</th>
+                                            <th>Package Name</th>
+                                            <th>Package Price</th>
+                                            <th>Credit</th>
+                                            <th>Time</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($users as $user)
+                                        @foreach ($payments as $payment)
                                         <tr>
-                                            <td>{{ $user->id }}</td>
-                                            <td>{{ $user->first_name }}&nbsp;{{ $user->last_name }}</td>
-                                            <td>{{ $user->email }}</td>
-                                            <td>{{ $user->mobile ? : 'N/A'}}</td>
-                                            <td>{{ number_format($user->credit_points, 2) ? : '0.00' }}</td>
-                                            <td>
-                                                <div style="display: flex;">
-                                                {{-- <a href="{{ route('users.view', $user->id) }}">
-                                                    <button class="btn btn-mat waves-effect waves-light btn-primary btn-sm">view</button>
-                                                </a> --}}
-                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-mat waves-effect waves-light btn-danger btn-sm">Delete</button>
-                                                </form>
-                                                </div>
-                                            </td>
+                                            <td>{{ $payment->payment_id }}</td>
+                                            <td>{{ $payment->user_name }}</td>
+                                            <td>{{ $payment->package_name }}</td>
+                                            <td>{{ $payment->package_price }}</td>
+                                            <td>{{ number_format($payment->credit_points, 2) }}</td>
+                                            <td>{{ $payment->buy_time }}</td>
                                         </tr>
-
                                         @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
