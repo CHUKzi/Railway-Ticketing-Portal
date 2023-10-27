@@ -65,6 +65,7 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Phone</th>
+                                            <th>Last Login</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -79,6 +80,7 @@
                                                 </td>
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->mobile ?: 'N/A' }}</td>
+                                                <td>{{ $user->last_login ?: 'Not yet' }}</td>
                                                 <td>
                                                     <form action="{{ route('user.destroy', $user->id) }}" method="POST">
                                                         @csrf

@@ -54,6 +54,8 @@ class UsersController extends AppBaseController
             if (!$token = JWTAuth::attempt($credentials)) {
                 return $this->sendResponse(null, null, 'Invalid credentials');
             }
+            $user = Auth::user();
+            $user->update(['last_login' => Carbon::now()]);
         } catch (JWTException $e) {
             Log::emergency("File:" . $e->getFile() . "Line:" . $e->getLine() . "Message:" . $e->getMessage());
             return $this->sendResponse(null, null, 'Could not create token');
