@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [UsersController::class, 'index'])->name('users.index');
         Route::get('/view/{id}', [UsersController::class, 'view'])->name('users.view');
         Route::delete('/destroy/{id}', [UsersController::class, 'destroy'])->name('users.destroy');
+        Route::get('/payments', [UsersController::class, 'payments'])->name('users.index.payments');
     });
 
     //Packages
@@ -93,6 +94,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::put('/password/update', [ProfileController::class, 'passwordUpdate'])->name('profile.password.update');
     });
+
 });
 
 require __DIR__ . '/auth.php';

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Buyer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -45,5 +47,23 @@ class UsersController extends Controller
         $user = User::find($id);
         $user->delete();
         return redirect()->back()->with('SuccessMessage','User deleted successfully');
+    }
+
+    public function payments()
+    {
+        $payments = Buyer::select([
+            'buyers_history.id AS payment_id',
+            DB::raw('CONCAT(users.first_name, " ", users.last_name) AS user_name'),
+            'packages.id AS package_id',
+            'packages.name AS package_name',
+            'packages.price AS package_price',
+            'packages.credit_points',
+            'buyers_history.created_at AS buy_time',
+        ])
+        ->join('packages', 'buyers_history.package_id', '=', 'packages.id')
+        ->join('users', 'buyers_history.user_id', '=', 'users.id')
+        ->get();
+
+       return view('users.payments', compact('payments'));
     }
 }
