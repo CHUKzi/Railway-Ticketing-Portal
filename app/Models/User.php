@@ -28,6 +28,12 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+    const Roles = [
+        "super admin"=>"Super admin",
+        "admin"=>"Admin",
+        "staff"=>"Staff"
+    ];
+
     protected $table = 'users';
     protected $guard_name = 'web';
 

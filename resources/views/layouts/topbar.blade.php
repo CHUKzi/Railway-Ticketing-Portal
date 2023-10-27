@@ -105,7 +105,7 @@
                             data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
 
                             <li>
-                                <a href="#!">
+                                <a href="{{ route('profile.edit') }}">
                                     <i class="feather icon-user"></i> Profile
                                 </a>
                             </li>
@@ -125,7 +125,7 @@
         </div>
     </div>
 </nav>
-
+{{--
 
 <div id="sidebar" class="users p-chat-user showChat">
     <div class="had-container">
@@ -264,3 +264,4 @@
         </div>
     </div>
 </div>
+ --}}

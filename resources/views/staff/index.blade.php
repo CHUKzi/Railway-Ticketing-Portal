@@ -43,7 +43,7 @@
             <div class="page-wrapper">
 
                 <div class="page-body">
-
+                    @include('../layouts/alert')
                     <div class="card">
                         {{--                         <div class="card-header">
                             <h5>Base Style</h5>
@@ -51,8 +51,10 @@
  --}}
                         <div class="card-block">
                             <div class="mb-4">
-                                <button class="btn btn-primary btn-round waves-effect waves-light float-right"><i
-                                        class="fa fa-plus-circle"></i>Add Station</button>
+                                <a href="{{ route('staff.create') }}">
+                                    <button class="btn btn-primary btn-round waves-effect waves-light float-right"><i
+                                        class="fa fa-plus-circle"></i>Add new staff</button>
+                                </a>
                             </div>
                             <div class="dt-responsive table-responsive">
 
@@ -78,10 +80,11 @@
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->mobile ?: 'N/A' }}</td>
                                                 <td>
-                                                    <a href="{{-- {{ route('users.view', $user->id) }} --}}">
-                                                        <button
-                                                            class="btn btn-mat waves-effect waves-light btn-primary btn-sm">view</button>
-                                                    </a>
+                                                    <form action="{{ route('user.destroy', $user->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-mat waves-effect waves-light btn-danger btn-sm">Remove</button>
+                                                    </form>
                                                     {{--                                                    <form action="{{ route('users.destroy', $user->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
