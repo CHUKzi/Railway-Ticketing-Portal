@@ -31,7 +31,7 @@ class StaffController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'mobile' => 'string|max:15|unique:users,mobile',
+            'mobile' => 'required|string|max:15|unique:users,mobile',
         ]);
 
         try {

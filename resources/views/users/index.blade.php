@@ -65,6 +65,7 @@
                                             <th>Email</th>
                                             <th>Phone</th>
                                             <th>Credit Points</th>
+                                            <th>Last Login</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -76,6 +77,7 @@
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->mobile ? : 'N/A'}}</td>
                                             <td>{{ number_format($user->credit_points, 2) ? : '0.00' }}</td>
+                                            <td>{{ $user->last_login ?: 'Not yet' }}</td>
                                             <td>
                                                 <div style="display: flex;">
                                                 {{-- <a href="{{ route('users.view', $user->id) }}">
