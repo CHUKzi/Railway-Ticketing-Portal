@@ -34,11 +34,11 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+/* Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+}); */
 
 //Routes
 Route::middleware('auth')->group(function () {
@@ -83,6 +83,15 @@ Route::middleware('auth')->group(function () {
     //Staff
     Route::prefix('/staff')->group(function () {
         Route::get('/', [StaffController::class, 'index'])->name('staff.index');
+        Route::get('/create', [StaffController::class, 'create'])->name('staff.create');
+        Route::post('/store', [StaffController::class, 'store'])->name('staff.store');
+        Route::delete('/destroy/{id}', [StaffController::class, 'destroy'])->name('user.destroy');
+    });
+
+    //Profile
+    Route::prefix('/profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/password/update', [ProfileController::class, 'passwordUpdate'])->name('profile.password.update');
     });
 });
 
