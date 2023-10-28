@@ -22,6 +22,15 @@
                     </a>
                 </li>
 
+                <li class="{{ request()->is('tickets-fares*') ? 'active' : '' }}">
+                    <a href="{{ route('tickets.fares.index') }}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="fa fa-industry"></i>
+                        </span>
+                        <span class="pcoded-mtext">Tickets Fares</span>
+                    </a>
+                </li>
+
                 <li class="{{ request()->is('trains*') ? 'active' : '' }}">
                     <a href="{{ route('trains.index') }}" class="waves-effect waves-dark">
                         <span class="pcoded-micon">
