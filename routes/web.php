@@ -5,6 +5,7 @@ use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StationsController;
+use App\Http\Controllers\TicketsFaresController;
 use App\Http\Controllers\TrainsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -95,6 +96,13 @@ Route::middleware('auth')->group(function () {
         Route::put('/password/update', [ProfileController::class, 'passwordUpdate'])->name('profile.password.update');
     });
 
+    //Tickets Fares
+    Route::prefix('/tickets-fares')->group(function () {
+        Route::get('/', [TicketsFaresController::class, 'index'])->name('tickets.fares.index');
+        Route::get('/create', [TicketsFaresController::class, 'create'])->name('tickets.fares.create');
+        Route::post('/store', [TicketsFaresController::class, 'store'])->name('tickets.fares.store');
+        Route::delete('/destroy/{id}', [TicketsFaresController::class, 'destroy'])->name('tickets.fares.destroy');
+    });
 });
 
 require __DIR__ . '/auth.php';

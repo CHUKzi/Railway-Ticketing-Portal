@@ -1,7 +1,7 @@
 <nav class="navbar header-navbar pcoded-header">
     <div class="navbar-wrapper">
         <div class="navbar-logo">
-            <a href="index.html">
+            <a href="{{ route('dashboard') }}">
                 <img class="img-fluid" src="{{ URL::asset('/build/assets/images/logo.png') }}" alt="Theme-Logo" width="200" />
             </a>
             <a class="mobile-menu" id="mobile-collapse" href="#!">
