@@ -88,6 +88,7 @@ class TicketsFaresController extends Controller
             $ticketsFare->class_1_price = $request->input('1_class_price');
             $ticketsFare->class_2_price = $request->input('2_class_price');
             $ticketsFare->class_3_price = $request->input('3_class_price');
+            $ticketsFare->currency = env('CURRENCY');
             $ticketsFare->save();
 
             $ticketsFare2 = new TicketsFare();
@@ -96,6 +97,7 @@ class TicketsFaresController extends Controller
             $ticketsFare2->class_1_price = $request->input('1_class_price');
             $ticketsFare2->class_2_price = $request->input('2_class_price');
             $ticketsFare2->class_3_price = $request->input('3_class_price');
+            $ticketsFare2->currency = env('CURRENCY');
             $ticketsFare2->save();
 
             return redirect()->route('tickets.fares.index')->with('SuccessMessage', 'Tickets Fare created successfully');
