@@ -6,6 +6,7 @@ use App\Models\User;
 use Exception;
 use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 
 class StaffController extends Controller
@@ -50,6 +51,7 @@ class StaffController extends Controller
             $user->email = $request->input('email');
             $user->mobile = $request->input('mobile');
             $user->assignRole($request->input('role'));
+            $user->email_verified_at = Carbon::now();
 
             $gen_password = uniqid();
             $user->password = Hash::make($gen_password);
