@@ -12,10 +12,20 @@ class EmailController extends Controller
     public function staffRegister($email, $information)
     {
         $MailData = [
-            'title' => 'Test Email From AllPHPTricks.com',
+            'title' => 'Staff Register',
             'html' => $information,
         ];
 
         Mail::to($email)->send(new StaffRegister($MailData));
+    }
+
+    public function userRegister($email, $information)
+    {
+        $MailData = [
+            'title' => 'user Register',
+            'html' => $information,
+        ];
+
+        Mail::to($email)->send(new UserRegister($MailData));
     }
 }

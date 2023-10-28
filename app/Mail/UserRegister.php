@@ -45,8 +45,8 @@ class UserRegister extends Mailable
 
     public function build()
     {
-        return $this->subject('You are assign to the '. env('CURRENCY') . ' Staff board')
-                    ->view('emails.staffboard');
+        return $this->subject('Verify your email address')
+                    ->view('emails.user-register');
     }
 
     /**

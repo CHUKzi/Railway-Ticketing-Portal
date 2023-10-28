@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\EmailController;
 use App\Models\Buyer;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -37,7 +38,18 @@ class UsersController extends AppBaseController
             $user->role_id = 4; // User role
             $user->credit_points = 0;
             $user->assignRole('user');
+            $user->email_verification_token = uniqid();
             $user->save();
+
+            $verify_url = url('/').'/verify/'.$user->email.'/'.$user->email_verification_token;
+
+            $send_informations = [
+                'verify_url' => $verify_url,
+            ];
+
+            $send_email = new EmailController();
+            $send_email->userRegister($user->email, $send_informations);
+
             return $this->sendResponse($user, 'User Registered Successful', null);
         } catch (\Illuminate\Validation\ValidationException $e) {
             return $this->sendResponse(null, null, $e->errors());
@@ -55,6 +67,9 @@ class UsersController extends AppBaseController
                 return $this->sendResponse(null, null, 'Invalid credentials');
             }
             $user = Auth::user();
+            if($user->email_verified_at === null) {
+                return $this->sendResponse(null, null, 'Please verify your email address');
+            }
             $user->update(['last_login' => Carbon::now()]);
         } catch (JWTException $e) {
             Log::emergency("File:" . $e->getFile() . "Line:" . $e->getLine() . "Message:" . $e->getMessage());
