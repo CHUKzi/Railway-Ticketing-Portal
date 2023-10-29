@@ -31,6 +31,15 @@
                     </a>
                 </li>
 
+                <li class="{{ request()->is('ticket-bookings*') ? 'active' : '' }}">
+                    <a href="{{ route('tickets.bookings.index') }}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="feather icon-calendar"></i>
+                        </span>
+                        <span class="pcoded-mtext">Ticket Bookings</span>
+                    </a>
+                </li>
+
                 <li class="{{ request()->is('trains*') ? 'active' : '' }}">
                     <a href="{{ route('trains.index') }}" class="waves-effect waves-dark">
                         <span class="pcoded-micon">

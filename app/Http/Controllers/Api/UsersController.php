@@ -253,7 +253,6 @@ class UsersController extends AppBaseController
                         }
 
                         $destination_for_points = $destination_for_points * $request->input('tickets_qty');
-                        Log::info($destination_for_points);
 
                         $user = Auth::user();
 
@@ -261,8 +260,14 @@ class UsersController extends AppBaseController
 
                             for ($i = 0; $i < $request->input('tickets_qty'); $i++) {
 
+                                //$recipe = time() . uniqid();
+
+                                $randomNumber = mt_rand(1000, 9999); // Generate a random 4-digit number
+                                $date = date('Ymd'); // Get the current date in the format YYYYMMDD
+                                $time = date('g:iA'); // Get the current time in the format hh:mma (e.g., 10:20AM)
+                                $recipe = $date . 'GT' . $time . $randomNumber;
+
                                 $booking = new Booking();
-                                $recipe = time() . uniqid();
                                 $booking->user_id = $user->id;
                                 $booking->from_station_id = $request->input('departure_station_id');
                                 $booking->to_station_id = $request->input('arrival_station_id');
@@ -281,12 +286,12 @@ class UsersController extends AppBaseController
 
                                 $booking_data = [
                                     'id' => $booking->id,
-                                    'recipe'=>$booking->recipe,
+                                    'receipt' => $booking->recipe,
                                     'departure_station_id' => $booking->from_station_id,
                                     'departure_station_name' => $departure_station->name,
                                     'arrival_station_id' => $booking->to_station_id,
                                     'arrival_station_name' => $arrival_station->name,
-                                    'class' => $request->input('class').' class',
+                                    'class' => $request->input('class') . ' class',
                                     'ticket_price' => $ticket_price,
                                     'currency' => $destination_info->currency,
                                     'spent_points' => $booking->spent_points,
@@ -294,20 +299,25 @@ class UsersController extends AppBaseController
                                     'status' => $booking->status,
                                     'booked_at' => $booking->created_at,
                                 ];
-                               /*  Your Ticket Booked Confirmation #book ID 334384029 */
-                                $booking_data_all[] =$booking_data;
+                                /*  Your Ticket Booked Confirmation #book ID 334384029 */
+                                $booking_data_all[] = $booking_data;
                             }
 
+                            $user->credit_points -= $booking->spent_points;
+                            $user->save();
                             //$destination_for_points - $user->credit_points;
 
                             $response = [
-                                'booking_information'=> $booking_data_all,
-                                'total'=> [
+                                'booking_information' => $booking_data_all,
+                                'total' => [
                                     'total_ticket_price' => number_format($ticket_price * $request->input('tickets_qty'), 2),
                                     'currency' => $destination_info->currency,
                                     'total_spent_points' => $destination_for_points,
                                 ],
                             ];
+
+                            $send_email = new EmailController();
+                            $send_email->ticketBook($user->email, $response);
 
                             return $this->sendResponse($response, 'Ticket Successfully Booked!', null);
                         } else {

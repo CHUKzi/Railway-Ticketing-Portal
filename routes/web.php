@@ -5,6 +5,7 @@ use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StationsController;
+use App\Http\Controllers\TicketBookingController;
 use App\Http\Controllers\TicketsFaresController;
 use App\Http\Controllers\TrainsController;
 use App\Http\Controllers\UsersController;
@@ -102,6 +103,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', [TicketsFaresController::class, 'create'])->name('tickets.fares.create');
         Route::post('/store', [TicketsFaresController::class, 'store'])->name('tickets.fares.store');
         Route::delete('/destroy/{id}', [TicketsFaresController::class, 'destroy'])->name('tickets.fares.destroy');
+    });
+
+    //Tickets Bookings
+    Route::prefix('/ticket-bookings')->group(function () {
+        Route::get('/', [TicketBookingController::class, 'index'])->name('tickets.bookings.index');
     });
 });
 

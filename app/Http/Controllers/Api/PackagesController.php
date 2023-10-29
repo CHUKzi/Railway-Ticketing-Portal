@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\EmailController;
 use App\Http\Requests\BuyRequest;
 use App\Models\Buyer;
 use App\Models\Package;
@@ -77,14 +78,20 @@ class PackagesController extends AppBaseController
             }
 
             $Data = [
+                "payment_id"=>$buyer->id,
                 "user_id" => $userData->id,
                 "package_id"=>$package->id,
+                "package_name" => $package->name,
+                'package_price' => $package->price,
+                'currency' => $package->currency,
                 "buy_points" => $package->credit_points,
                 "current_credit_points"=>number_format($userData->credit_points, 2),
-                "payment_id"=>$buyer->id,
                 "payment_type"=>$buyer->payment_type,
                 "time" => $buyer->created_at,
             ];
+
+            $send_email = new EmailController();
+            $send_email->buyPackage($user->email, $Data);
 
             return $this->sendResponse($Data, 'Payment successful!', null);
 
