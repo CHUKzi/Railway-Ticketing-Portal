@@ -32,8 +32,17 @@ Route::middleware('api')->prefix('/v1')->group(function () {
         Route::post('/buy', [PackagesController::class, 'buyNow']);
     });
 
+    // My Account
     Route::prefix('/my')->middleware('auth:api')->group(function () {
         Route::get('/payments', [UsersController::class, 'myPayments']);
         Route::get('/account', [UsersController::class, 'myAccount']);
+    });
+
+    // Tickets
+    Route::prefix('/tickets')->middleware('auth:api')->group(function () {
+        Route::prefix('/book')->group(function () {
+            Route::post('/qr-scan', [UsersController::class, 'qrScan']);
+            Route::post('/pay', [UsersController::class, 'payNow']);
+        });
     });
 });
