@@ -48,7 +48,7 @@
                                                     <th style="border: 1px solid black; padding: 8px;">To</th>
                                                     <th style="border: 1px solid black; padding: 8px;">Status</th>
                                                     <th style="border: 1px solid black; padding: 8px;">Class</th>
-                                                    <th style="border: 1px solid black; padding: 8px;">QR</th>
+                                                    <th style="border: 1px solid black; padding: 8px;">Recipt</th>
                                                 </tr>
 
                                                 <tbody>
@@ -58,10 +58,11 @@
                                                         <td style="border: 1px solid black; padding: 8px; text-align: center;">{{ $data['arrival_station_name'] }}</td>
                                                         <td style="border: 1px solid black; padding: 8px; text-align: center;">{{ $data['status'] }}</td>
                                                         <td style="border: 1px solid black; padding: 8px; text-align: center;">{{ $data['class'] }}</td>
-                                                        <td style="border: 1px solid black; padding: 8px; text-align: center;">
+{{--                                                         <td style="border: 1px solid black; padding: 8px; text-align: center;">
                                                             <img src="{{ $data['qr_code'] }}"
                                                                 alt="Recipe QR CODE" width="100">
-                                                        </td>
+                                                        </td> --}}
+                                                        <td style="border: 1px solid black; padding: 8px; text-align: center;">{{ $data['receipt'] }}</td>
                                                     </tr>
                                                     @endforeach
 

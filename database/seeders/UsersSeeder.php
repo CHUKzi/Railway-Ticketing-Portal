@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Carbon;
 
 class UsersSeeder extends Seeder
 {
@@ -22,10 +23,10 @@ class UsersSeeder extends Seeder
             'email' => 'royanharsha6@gmail.com',
             'password' => bcrypt('123456'),
             'credit_points' => 0,
+            'email_verified_at'=> Carbon::now(),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
-
         $user->assignRole('super admin');
     }
 }

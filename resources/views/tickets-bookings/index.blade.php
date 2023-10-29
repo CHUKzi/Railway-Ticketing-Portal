@@ -63,7 +63,7 @@
                                             <th>Arrival Station</th>
                                             <th>Class</th>
                                             <th>Status</th>
-                                            <th>Tiackt Price</th>
+                                            <th>Ticket Price</th>
                                             <th>Spent Points</th>
                                             <th>Booked At</th>
                                         </tr>
@@ -77,7 +77,13 @@
                                             <td>{{ $booking->departure_station }}</td>
                                             <td>{{ $booking->arrival_station }}</td>
                                             <td>{{ $booking->class }}</td>
-                                            <td>{{ $booking->booking_status }}</td>
+                                            <td>
+                                                @if($booking->booking_status ==='active')
+                                                <label class="label label-info">{{ $booking->booking_status }}</label>
+                                                @else
+                                                <label class="label label-success">{{ $booking->booking_status }}</label>
+                                                @endif
+                                            </td>
                                             <td>{{ $booking->price }}</td>
                                             <td>{{ $booking->spent_points }}</td>
                                             <td>{{ $booking->booked_at }}</td>

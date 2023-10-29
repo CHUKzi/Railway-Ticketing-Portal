@@ -13,7 +13,7 @@ class UsersController extends Controller
     public function index()
     {
         // Index users
-        $users = User::role('user')->get();
+        $users = User::all();
         return view('users.index', compact('users'));
     }
 
@@ -45,6 +45,9 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+        if ($user->id === 1) {
+            return redirect()->route('users.index')->with('ErrorMessage', 'Can\'t Remove Server Admin');
+        }
         $user->delete();
         return redirect()->back()->with('SuccessMessage','User deleted successfully');
     }

@@ -264,7 +264,7 @@ class UsersController extends AppBaseController
 
                                 $randomNumber = mt_rand(1000, 9999); // Generate a random 4-digit number
                                 $date = date('Ymd'); // Get the current date in the format YYYYMMDD
-                                $time = date('g:iA'); // Get the current time in the format hh:mma (e.g., 10:20AM)
+                                $time = date('giA'); // Get the current time in the format hh:mma (e.g., 10:20AM)
                                 $recipe = $date . 'GT' . $time . $randomNumber;
 
                                 $booking = new Booking();

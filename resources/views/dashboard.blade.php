@@ -94,12 +94,12 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col">
-                                            <h6 class="m-b-25">Not Yet</h6>
-                                            <h3 class="f-w-700 text-c-yellow">0</h3>
+                                            <h6 class="m-b-25">Total Active Booking</h6>
+                                            <h3 class="f-w-700 text-c-yellow">{{ $count_booking }}</h3>
                                             {{-- <p class="m-b-0"></p> --}}
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-hand-paper bg-c-red"></i>
+                                            <i class="fas feather icon-calendar bg-c-red"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -109,12 +109,93 @@
 
                     </div>
 
+                    <div class="row">
+                        <div class="col-sm-6">
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Last 7 Days Booking</h5>
+                                </div>
+                                <div class="card-block">
+                                    <center>
+                                        <div id="booking_chart" style="width: auto; height: 400px;"></div>
+                                    </center>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-6">
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Last 7 Days Payments</h5>
+                                </div>
+                                <div class="card-block">
+                                    <center>
+                                        <div id="payment_chart" style="width: auto; height: 400px;"></div>
+                                    </center>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
     </div>
 @endsection
 @section('script')
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var chartData = {!! $last7_days_booking_data !!}; // Parse the chart data from the PHP variable
+
+      var data = google.visualization.arrayToDataTable(chartData);
+
+      var options = {
+        chart: {
+          title: '',
+          subtitle: '',
+        }
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('booking_chart'));
+
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+  </script>
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var chartData = {!! $last7_days_payment_data !!}; // Parse the chart data from the PHP variable
+
+      var data = google.visualization.arrayToDataTable(chartData);
+
+      var options = {
+        chart: {
+          title: '',
+          subtitle: '',
+        }
+      };
+
+      var chart = new google.charts.Bar(document.getElementById('payment_chart'));
+
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+  </script>
+
+
     <script src="{{ URL::asset('/build/assets/pages/chart/float/jquery.flot.js') }} "></script>
     <script src="{{ URL::asset('/build/assets/pages/chart/float/jquery.flot.categories.js') }}"></script>
     <script src="{{ URL::asset('/build/assets/pages/chart/float/curvedLines.js') }}"></script>
