@@ -86,7 +86,7 @@
                                                     @if ($user->email_verified_at)
                                                         <label class="label label-info">Verified</label>
                                                     @else
-                                                        <label class="label label-danger">Pedding</label>
+                                                        <label class="label label-danger">Pending</label>
                                                     @endif
                                                 </td>
                                                 <td>{{ $user->last_login ?: 'Not yet' }}</td>
