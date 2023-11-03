@@ -27,7 +27,7 @@ Tickets Fares
         @endslot
 
         @slot('description')
-            Registerd Tickets Fares
+        Registered Tickets Fares
         @endslot
 
         @slot('page_header')
@@ -60,8 +60,7 @@ Tickets Fares
                             </div>
                             <div class="dt-responsive table-responsive">
 
-                                <table id="base-style"
-                                    class="table table-striped table-bordered nowrap">
+                                <table class="table table-striped table-bordered nowrap base-style">
                                     <thead>
                                         <tr>
                                             <th>From</th>

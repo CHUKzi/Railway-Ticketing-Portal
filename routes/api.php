@@ -36,6 +36,7 @@ Route::middleware('api')->prefix('/v1')->group(function () {
     Route::prefix('/my')->middleware('auth:api')->group(function () {
         Route::get('/payments', [UsersController::class, 'myPayments']);
         Route::get('/account', [UsersController::class, 'myAccount']);
+        Route::get('/booking/history', [UsersController::class, 'bookingHistory']);
     });
 
     // Tickets
@@ -44,5 +45,10 @@ Route::middleware('api')->prefix('/v1')->group(function () {
             Route::post('/qr-scan', [UsersController::class, 'qrScan']);
             Route::post('/pay', [UsersController::class, 'payNow']);
         });
+    });
+
+    // Cms
+    Route::prefix('/cms')->group(function () {
+        Route::get('/terms-policies', [UsersController::class, 'TermsAndPolicies']);
     });
 });

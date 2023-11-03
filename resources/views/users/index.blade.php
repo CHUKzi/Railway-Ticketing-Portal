@@ -24,7 +24,7 @@
         @endslot
 
         @slot('description')
-            Registerd Users
+            Registered Users
         @endslot
 
         @slot('page_header')
@@ -53,7 +53,7 @@
 
                             <div class="dt-responsive table-responsive">
 
-                                <table id="base-style" class="table table-striped table-bordered nowrap">
+                                <table class="table table-striped table-bordered nowrap base-style">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
@@ -92,9 +92,9 @@
                                                 <td>{{ $user->last_login ?: 'Not yet' }}</td>
                                                 <td>
                                                     <div style="display: flex;">
-                                                        {{-- <a href="{{ route('users.view', $user->id) }}">
+                                                        <a href="{{ route('users.view', $user->id) }}">
                                                     <button class="btn btn-mat waves-effect waves-light btn-primary btn-sm">view</button>
-                                                </a> --}}
+                                                </a>
                                                         <form action="{{ route('users.destroy', $user->id) }}"
                                                             method="POST">
                                                             @csrf

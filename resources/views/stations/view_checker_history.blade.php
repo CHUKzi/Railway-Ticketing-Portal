@@ -71,7 +71,7 @@
                                     </div> --}}
                                     <div class="dt-responsive table-responsive">
 
-                                        <table id="base-style" class="table table-striped table-bordered nowrap">
+                                        <table class="table table-striped table-bordered nowrap base-style">
                                             <thead>
                                                 <tr>
                                                     <th>ID</th>
