@@ -117,7 +117,7 @@
 
                                                     <div class="checkbox-zoom zoom-primary">
                                                         <label>
-                                                            <input type="checkbox" name="class_1" value="{{ $train->class_1 }}">
+                                                            <input type="checkbox" name="class_1" value="{{ $train->class_1 }}" {{ $train->class_1 ? 'checked' : '' }}>
                                                             <span class="cr">
                                                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                             </span>
@@ -128,7 +128,7 @@
 
                                                     <div class="checkbox-zoom zoom-primary">
                                                         <label>
-                                                            <input type="checkbox" name="class_2" value="{{ $train->class_2 }}">
+                                                            <input type="checkbox" name="class_2" value="{{ $train->class_2 }}" {{ $train->class_2 ? 'checked' : '' }}>
                                                             <span class="cr">
                                                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                             </span>
@@ -139,7 +139,7 @@
 
                                                     <div class="checkbox-zoom zoom-primary">
                                                         <label>
-                                                            <input type="checkbox" name="class_3" value="{{ $train->class_3 }}">
+                                                            <input type="checkbox" name="class_3" value="{{ $train->class_3 }}" {{ $train->class_3 ? 'checked' : '' }}>
                                                             <span class="cr">
                                                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                                             </span>
