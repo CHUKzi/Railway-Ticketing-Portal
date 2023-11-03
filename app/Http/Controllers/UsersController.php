@@ -82,6 +82,8 @@ class UsersController extends Controller
         ->where('buyers_history.user_id', 3)
         ->get();
 
+        dd($payments,$bookings);
+
         return view('users.view', compact('user', 'bookings', 'payments'));
     }
 
