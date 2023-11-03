@@ -65,7 +65,7 @@ class UsersController extends Controller
             $join->on('tf.from_station_id', '=', 'bookings.from_station_id')
                 ->on('tf.to_station_id', '=', 'bookings.to_station_id');
         })
-        ->where('bookings.user_id', 26)
+        ->where('bookings.user_id', $id)
         ->get();
 
         $payments = Buyer::select([
@@ -79,10 +79,8 @@ class UsersController extends Controller
         ])
         ->join('packages', 'buyers_history.package_id', '=', 'packages.id')
         ->join('users', 'buyers_history.user_id', '=', 'users.id')
-        ->where('buyers_history.user_id', 3)
+        ->where('buyers_history.user_id', $id)
         ->get();
-
-        dd($payments,$bookings);
 
         return view('users.view', compact('user', 'bookings', 'payments'));
     }
