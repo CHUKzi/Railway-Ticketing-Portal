@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\EmailController;
 use App\Models\Booking;
 use App\Models\Buyer;
+use App\Models\Cms;
 use App\Models\Station;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use App\Models\TicketsFare;
 use Exception;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -61,7 +63,7 @@ class UsersController extends AppBaseController
             return $this->sendResponse(null, null, $e->errors());
         } catch (Exception $e) {
             Log::emergency("File:" . $e->getFile() . "Line:" . $e->getLine() . "Message:" . $e->getMessage());
-            return $this->sendResponse(null, null, 'Store Failed');
+            return $this->sendResponse(null, null,'It\'s a technical error! Please reach out to our customer service.');
         }
     }
 
@@ -95,7 +97,7 @@ class UsersController extends AppBaseController
             return $this->sendResponse(null, null, 'User not authenticated');
         } catch (Exception $e) {
             Log::emergency("File:" . $e->getFile() . "Line:" . $e->getLine() . "Message:" . $e->getMessage());
-            return $this->sendResponse(null, null, 'Logout failed');
+            return $this->sendResponse(null, null,'It\'s a technical error! Please reach out to our customer service.');
         }
     }
 
@@ -117,7 +119,7 @@ class UsersController extends AppBaseController
             return $this->sendResponse($Data, 'Fetch data successfully!', null);
         } catch (Exception $e) {
             Log::emergency("File:" . $e->getFile() . "Line:" . $e->getLine() . "Message:" . $e->getMessage());
-            return $this->sendResponse(null, null, 'failed');
+            return $this->sendResponse(null, null,'It\'s a technical error! Please reach out to our customer service.');
         }
     }
 
@@ -140,7 +142,7 @@ class UsersController extends AppBaseController
             return $this->sendResponse($payments, count($payments) . ' records found', null);
         } catch (Exception $e) {
             Log::emergency("File:" . $e->getFile() . "Line:" . $e->getLine() . "Message:" . $e->getMessage());
-            return $this->sendResponse(null, null, 'failed');
+            return $this->sendResponse(null, null,'It\'s a technical error! Please reach out to our customer service.');
         }
     }
 
@@ -200,7 +202,7 @@ class UsersController extends AppBaseController
             return $this->sendResponse(null, null, $e->errors());
         } catch (Exception $e) {
             Log::emergency("File:" . $e->getFile() . "Line:" . $e->getLine() . "Message:" . $e->getMessage());
-            return $this->sendResponse(null, null, 'Store Failed');
+            return $this->sendResponse(null, null,'It\'s a technical error! Please reach out to our customer service.');
         }
     }
 
@@ -261,10 +263,9 @@ class UsersController extends AppBaseController
                             for ($i = 0; $i < $request->input('tickets_qty'); $i++) {
 
                                 //$recipe = time() . uniqid();
-
-                                $randomNumber = mt_rand(1000, 9999); // Generate a random 4-digit number
-                                $date = date('Ymd'); // Get the current date in the format YYYYMMDD
-                                $time = date('giA'); // Get the current time in the format hh:mma (e.g., 10:20AM)
+                                $randomNumber = mt_rand(1000, 9999);
+                                $date = date('Ymd');
+                                $time = date('giA');
                                 $recipe = $date . 'GT' . $time . $randomNumber;
 
                                 $booking = new Booking();
@@ -335,7 +336,61 @@ class UsersController extends AppBaseController
             return $this->sendResponse(null, null, $e->errors());
         } catch (Exception $e) {
             Log::emergency("File:" . $e->getFile() . "Line:" . $e->getLine() . "Message:" . $e->getMessage());
-            return $this->sendResponse(null, null, 'Store Failed');
+            return $this->sendResponse(null, null,'It\'s a technical error! Please reach out to our customer service.');
         }
+    }
+
+    public function bookingHistory()
+    {
+        try {
+            $bookings = Booking::select([
+                'bookings.id AS booking_id',
+                'bookings.recipe',
+                'sf.name AS departure_station',
+                'st.name AS arrival_station',
+                DB::raw('CONCAT(bookings.class, " class") AS class'),
+                'bookings.status AS booking_status',
+                DB::raw('CASE
+                    WHEN bookings.class = 1 THEN tf.class_1_price
+                    WHEN bookings.class = 2 THEN tf.class_2_price
+                    WHEN bookings.class = 3 THEN tf.class_3_price
+                    END AS price'),
+                'bookings.spent_points',
+                'bookings.created_at AS booked_at',
+            ])
+            ->leftJoin('users', 'bookings.user_id', '=', 'users.id')
+            ->leftJoin('stations AS sf', 'bookings.from_station_id', '=', 'sf.id')
+            ->leftJoin('stations AS st', 'bookings.to_station_id', '=', 'st.id')
+            ->leftJoin('tickets_fares AS tf', function ($join) {
+                $join->on('tf.from_station_id', '=', 'bookings.from_station_id')
+                    ->on('tf.to_station_id', '=', 'bookings.to_station_id');
+            })
+            ->where('bookings.user_id', Auth::user()->id)
+            ->get();
+
+            return $this->sendResponse($bookings, count($bookings) . ' records found', null);
+
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return $this->sendResponse(null, null, $e->errors());
+        } catch (Exception $e) {
+            Log::emergency("File:" . $e->getFile() . "Line:" . $e->getLine() . "Message:" . $e->getMessage());
+            return $this->sendResponse(null, null,'It\'s a technical error! Please reach out to our customer service.');
+        }
+    }
+
+    public function TermsAndPolicies()
+    {
+        try {
+            $terms = Cms::where('type', 'terms')->first();
+            if ($terms) {
+                return $this->sendResponse($terms, 'Terms & Policy retried successfully!', null);
+            } else {
+                return $this->sendResponse(null, null, 'Terms & Policy not found');
+            }
+        } catch (Exception $e) {
+            Log::emergency("File:" . $e->getFile() . "Line:" . $e->getLine() . "Message:" . $e->getMessage());
+            return $this->sendResponse(null, null,'It\'s a technical error! Please reach out to our customer service.');
+        }
+
     }
 }

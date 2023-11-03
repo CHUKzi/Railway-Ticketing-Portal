@@ -35,7 +35,7 @@ class PackagesController extends AppBaseController
 
         } catch (Exception $e) {
             Log::emergency("File:" . $e->getFile() . "Line:" . $e->getLine() . "Message:" . $e->getMessage());
-            return $this->sendResponse(null, null, 'Failed');
+            return $this->sendResponse(null, null,'It\'s a technical error! Please reach out to our customer service.');
         }
     }
 
@@ -52,7 +52,7 @@ class PackagesController extends AppBaseController
 
         } catch (Exception $e) {
             Log::emergency("File:" . $e->getFile() . "Line:" . $e->getLine() . "Message:" . $e->getMessage());
-            return $this->sendResponse(null, null, 'Failed');
+            return $this->sendResponse(null, null,'It\'s a technical error! Please reach out to our customer service.');
         }
     }
 

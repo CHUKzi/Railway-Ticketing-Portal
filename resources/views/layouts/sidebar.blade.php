@@ -86,6 +86,15 @@
                     </a>
                 </li>
 
+                <li class="{{ Str::endsWith(request()->path(), 'terms-policies') ? 'active' : '' }}">
+                    <a href="{{ route('terms.policies') }}" class="waves-effect waves-dark">
+                        <span class="pcoded-micon">
+                            <i class="fa fa-balance-scale"></i>
+                        </span>
+                        <span class="pcoded-mtext">Terms & Policies</span>
+                    </a>
+                </li>
+
 
             </ul>
 

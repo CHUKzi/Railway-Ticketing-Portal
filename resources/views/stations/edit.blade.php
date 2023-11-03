@@ -112,13 +112,14 @@
 
                                         </div>
                                         <div class="form-group">
+                                            <a href="{{ route('stations.index') }}"><button type="button" class="btn btn-danger m-b-0">Cancel</button></a>
                                             <button type="submit" class="btn btn-primary m-b-0">Update</button>
 
 
                                         </div>
                                     </form>
 
-                                    <a href="{{ route('stations.index') }}"><button class="btn btn-danger m-b-0">Cancel</button></a>
+                                   {{--  <a href="{{ route('stations.index') }}"><button class="btn btn-danger m-b-0">Cancel</button></a> --}}
                                 </div>
                             </div>
 

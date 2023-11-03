@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CmsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\ProfileController;
@@ -63,6 +64,11 @@ Route::middleware('auth')->group(function () {
     //Trains
     Route::prefix('/trains')->group(function () {
         Route::get('/', [TrainsController::class, 'index'])->name('trains.index');
+        Route::get('/create', [TrainsController::class, 'create'])->name('trains.create');
+        Route::post('/store', [TrainsController::class, 'store'])->name('trains.store');
+        Route::get('/edit/{id}', [TrainsController::class, 'edit'])->name('trains.edit');
+        Route::put('/update/{id}', [TrainsController::class, 'update'])->name('trains.update');
+        Route::delete('/destroy/{id}', [TrainsController::class, 'destroy'])->name('trains.destroy');
     });
 
     //Users
@@ -108,6 +114,12 @@ Route::middleware('auth')->group(function () {
     //Tickets Bookings
     Route::prefix('/ticket-bookings')->group(function () {
         Route::get('/', [TicketBookingController::class, 'index'])->name('tickets.bookings.index');
+    });
+
+    //CMS
+    Route::prefix('/cms')->group(function () {
+        Route::get('/terms-policies', [CmsController::class, 'termsAndPolicies'])->name('terms.policies');
+        Route::post('/terms-policies/update', [CmsController::class, 'updateTermsAndPolicies'])->name('terms.policies.update');
     });
 });
 
