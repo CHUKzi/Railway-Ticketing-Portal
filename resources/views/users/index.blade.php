@@ -71,7 +71,7 @@
                                             <tr>
                                                 <td>{{ $user->id }}</td>
                                                 <td>
-                                                    {{ $user->first_name }}&nbsp;{{ $user->last_name }}<br/>
+                                                    {{ $user->first_name }}&nbsp;{{ $user->last_name }}<br />
                                                     @foreach ($user->getRoleNames() as $role)
                                                         @if ($role === 'staff' || $role === 'admin' || $role === 'super admin')
                                                             <span class="badge badge-primary">{{ $role }}</span>
@@ -93,8 +93,9 @@
                                                 <td>
                                                     <div style="display: flex;">
                                                         <a href="{{ route('users.view', $user->id) }}">
-                                                    <button class="btn btn-mat waves-effect waves-light btn-primary btn-sm">view</button>
-                                                </a>
+                                                            <button
+                                                                class="btn btn-mat waves-effect waves-light btn-primary btn-sm">view</button>
+                                                        </a>
                                                         <form action="{{ route('users.destroy', $user->id) }}"
                                                             method="POST">
                                                             @csrf
@@ -121,6 +122,7 @@
 
 
 @section('script')
+
     <script src="{{ URL::asset('/build/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('/build/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js') }}..">
     </script>
