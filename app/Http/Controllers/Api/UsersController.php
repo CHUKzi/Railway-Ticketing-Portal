@@ -368,6 +368,12 @@ class UsersController extends AppBaseController
             ->where('bookings.user_id', Auth::user()->id)
             ->get();
 
+            $bookings = collect($bookings);
+
+            if ($bookings->isEmpty()) {
+                return $this->sendResponse(null, null, 'Bookings not found');
+            }
+
             return $this->sendResponse($bookings, count($bookings) . ' records found', null);
 
         } catch (\Illuminate\Validation\ValidationException $e) {
