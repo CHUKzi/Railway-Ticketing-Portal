@@ -30,19 +30,19 @@ class UsersController extends AppBaseController
         //User Registration
         try {
             $request->validate([
-                'user.first_name' => 'required|string|max:255',
-                'user.last_name' => 'required|string|max:255',
-                'user.email' => 'required|email|unique:users,email',
-                'user.mobile' => 'required|string|max:15|unique:users,mobile',
-                'user.password' => 'required|string|min:6',
+                'first_name' => 'required|string|max:255',
+                'last_name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'mobile' => 'required|string|max:15|unique:users,mobile',
+                'password' => 'required|string|min:6|confirmed',
             ]);
 
             $user = new User();
-            $user->first_name =  $request->input('user.first_name');
-            $user->last_name = $request->input('user.last_name');
-            $user->email = $request->input('user.email');
-            $user->mobile = $request->input('user.mobile');
-            $user->password = bcrypt($request->input('user.password'));
+            $user->first_name =  $request->input('first_name');
+            $user->last_name = $request->input('last_name');
+            $user->email = $request->input('email');
+            $user->mobile = $request->input('mobile');
+            $user->password = bcrypt($request->input('password'));
             $user->role_id = 4; // User role
             $user->credit_points = 0;
             $user->assignRole('user');
