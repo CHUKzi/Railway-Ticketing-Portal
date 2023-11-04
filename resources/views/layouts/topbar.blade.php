@@ -12,8 +12,8 @@
             </a>
         </div>
         <div class="navbar-container container-fluid">
-{{--             <ul class="nav-left">
-                <li class="header-search">
+            <ul class="nav-left">
+                {{-- <li class="header-search">
                     <div class="main-search morphsearch-search">
                         <div class="input-group">
                             <span class="input-group-prepend search-close">
@@ -30,16 +30,16 @@
                     <a href="#!" onclick="javascript:toggleFullScreen()" class="waves-effect waves-light">
                         <i class="full-screen feather icon-maximize"></i>
                     </a>
-                </li>
-            </ul> --}}
+                </li> --}}
+            </ul>
             <ul class="nav-right">
-{{--                 <li class="header-notification">
+                <li class="header-notification">
                     <div class="dropdown-primary dropdown">
-                        <div class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="feather icon-bell"></i>
-                            <span class="badge bg-c-red">5</span>
-                        </div>
-                        <ul class="show-notification notification-view dropdown-menu"
+                        {{-- <div class="dropdown-toggle" data-toggle="dropdown"> --}}
+{{--                             <i class="feather icon-bell"></i>
+                            <span class="badge bg-c-red">5</span> --}}
+                        {{-- </div> --}}
+                        {{-- <ul class="show-notification notification-view dropdown-menu"
                             data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                             <li>
                                 <h6>Notifications</h6>
@@ -81,17 +81,17 @@
                                     </div>
                                 </div>
                             </li>
-                        </ul>
+                        </ul> --}}
                     </div>
                 </li>
                 <li class="header-notification">
                     <div class="dropdown-primary dropdown">
-                        <div class="displayChatbox dropdown-toggle" data-toggle="dropdown">
-                            <i class="feather icon-message-square"></i>
-                            <span class="badge bg-c-green">3</span>
-                        </div>
+                        {{-- <div class="displayChatbox dropdown-toggle" data-toggle="dropdown"> --}}
+{{--                             <i class="feather icon-message-square"></i>
+                            <span class="badge bg-c-green">3</span> --}}
+                        {{-- </div> --}}
                     </div>
-                </li> --}}
+                </li>
 
                 <li class="user-profile header-notification">
                     <div class="dropdown-primary dropdown">
@@ -125,9 +125,9 @@
         </div>
     </div>
 </nav>
-{{--
 
-<div id="sidebar" class="users p-chat-user showChat">
+
+{{-- <div id="sidebar" class="users p-chat-user showChat">
     <div class="had-container">
         <div class="p-fixed users-main">
             <div class="user-box">
@@ -263,5 +263,5 @@
             </div>
         </div>
     </div>
-</div>
- --}}
+</div> --}}
+
