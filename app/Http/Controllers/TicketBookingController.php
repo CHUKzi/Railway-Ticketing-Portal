@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -53,5 +54,19 @@ class TicketBookingController extends Controller
 
     public function destroy()
     {
+    }
+
+    public function sendTicketStatus($bookings, $status)
+    {
+        // Pending
+
+         foreach ($bookings as $booking){
+            $bookinfo = Booking::find($booking->id);
+            $user = User::find($booking->user_id);
+            $send_email = new EmailController();
+            $send_email->ticketStatusUpdate($user->email, $bookinfo);
+         }
+
+         return true;
     }
 }
